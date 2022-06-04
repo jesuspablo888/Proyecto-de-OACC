@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="812.0" style="-fx-background-color: #C6CFD5;" type="Pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fes.aragon.controlador.ClienteController">
+   <children>
+      <TableView fx:id="tblTablaCliente" layoutX="66.0" layoutY="98.0" prefHeight="268.0" prefWidth="673.0">
+        <columns>
+          <TableColumn fx:id="clienteID" prefWidth="83.0" text="ID" />
+          <TableColumn fx:id="clienteNombre" prefWidth="256.0" text="Nombre" />
+            <TableColumn fx:id="clienmteApellidoPaterno" prefWidth="254.0" text="Apellido Paterno" />
+            <TableColumn fx:id="comando" prefWidth="79.0" text="Opciones" />
+        </columns>
+      </TableView>
+      <FontAwesomeIconView fill="#001aff" glyphName="USER_PLUS" layoutX="26.0" layoutY="81.0" onMouseClicked="#nuevoCliente" size="30">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></FontAwesomeIconView>
+      <FontAwesomeIconView fill="LIME" glyphName="REFRESH" layoutX="74.0" layoutY="81.0" onMouseClicked="#refrescar" size="30">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></FontAwesomeIconView>
+      <Label layoutX="14.0" layoutY="14.0" text="Cliente">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <FontAwesomeIconView fill="#36a88f" glyphName="SEARCH" layoutX="117.0" layoutY="81.0" onMouseClicked="#buscarCliente" size="30">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
+   </children>
+</fx:root>

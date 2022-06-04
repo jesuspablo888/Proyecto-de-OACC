@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="idPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="992.0" style="-fx-background-color: #AAB7C0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fes.aragon.controlador.PrincipalController">
+   <center>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../recursos/fes-aragon.png" />
+         </image>
+      </ImageView>
+   </center>
+   <left>
+      <ToolBar orientation="VERTICAL" prefHeight="400.0" prefWidth="170.0" style="-fx-background-color: #002847;" BorderPane.alignment="CENTER">
+         <items>
+            <ImageView fitHeight="132.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/fes-aragon.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnClientes" graphicTextGap="20.0" mnemonicParsing="false" onAction="#accionCliente" prefHeight="25.0" prefWidth="140.0" stylesheets="@../inicio/application.css" text="Clientes" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USERS" />
+               </graphic>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnFactura" graphicTextGap="20.0" mnemonicParsing="false" onAction="#accionFactura" prefHeight="25.0" prefWidth="140.0" stylesheets="@../inicio/application.css" text="Factura" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="FILE_TEXT_ALT" />
+               </graphic>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnFacturaProd" mnemonicParsing="false" onAction="#accionFacturaProd" prefHeight="25.0" prefWidth="140.0" stylesheets="@../inicio/application.css" text="Fac_Prod" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="FILES_ALT" />
+               </graphic>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProducto" mnemonicParsing="false" onAction="#accionProducto" prefHeight="25.0" prefWidth="140.0" stylesheets="@../inicio/application.css" text="Producto" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SHOPPING_BAG" />
+               </graphic>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </items>
+      </ToolBar>
+   </left>
+</BorderPane>
