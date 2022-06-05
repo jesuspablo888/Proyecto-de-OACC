@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import fes.aragon.modelo.Clientes;
+import fes.aragon.modelo.Productos;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -98,5 +99,64 @@ public class Conexion {
 		conexion.close();
 	}
 
+	// PRODUCTOS
+
+	public ObservableList<Productos> todosProductos() throws SQLException {
+		ObservableList<Productos> lista = FXCollections.observableArrayList();
+		String query = "{call todosProductos()}";
+		CallableStatement solicitud = conexion.prepareCall(query);
+		ResultSet datos = solicitud.executeQuery(query);
+		if (!datos.next()) {
+			System.out.println("no hay datos");
+		} else {
+			do {
+				Productos pr = new Productos();
+				pr.setId(datos.getInt(1));
+				pr.setNombreP(datos.getString(2));
+				pr.setPreciop(datos.getDouble(3));
+				lista.add(pr);
+			} while (datos.next());
+		}
+		datos.close();
+		solicitud.close();
+		conexion.close();
+		return lista;
+	}
+
+	public ObservableList<Productos> buscarProductos(String patron) throws SQLException {
+		ObservableList<Productos> lista = FXCollections.observableArrayList();
+		String queryBP = "{call buscarProductos(?)}";
+		CallableStatement solicitud = conexion.prepareCall(queryBP);
+		solicitud.setString(1, patron);
+		ResultSet datos = solicitud.executeQuery();
+		if (!datos.next()) {
+			System.out.println("no hay datos");
+		} else {
+			do {
+				Productos pr = new Productos();
+				pr.setId(Integer.parseInt(datos.getString(1)));
+				pr.setNombreP(datos.getString(2));
+				pr.setPreciop(Double.parseDouble(datos.getString(3)));
+				lista.add(pr);
+			} while (datos.next());
+		}
+		datos.close();
+		solicitud.close();
+		conexion.close();
+		return lista;
+	}
+
+	public void almacenarProductos(Productos produ) throws SQLException {
+
+	}
+
+	public void eliminarProducto(int id) throws SQLException {
+
+
+	}
+
+	public void modificarProducto(Productos produ) throws SQLException {
+
+	}
 	
 }
