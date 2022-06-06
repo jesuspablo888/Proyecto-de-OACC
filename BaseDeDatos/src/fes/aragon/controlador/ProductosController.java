@@ -71,7 +71,20 @@ public class ProductosController implements Initializable{
 
     @FXML
     void nuevoProducto(MouseEvent event) {
+    	try {
+			Parent parent = FXMLLoader.load(getClass().getResource("/fes/aragon/vista/NuevoProducto.fxml"));
+			Scene escena = new Scene(parent);
+			Stage escenario = new Stage();
 
+			escenario.initModality(Modality.APPLICATION_MODAL);
+			escenario.initOwner(tblTablaProductos.getScene().getWindow());
+
+			escenario.setScene(escena);
+			escenario.initStyle(StageStyle.UTILITY);
+			escenario.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
@@ -169,7 +182,22 @@ public class ProductosController implements Initializable{
 	}
 
 	private void modificarProducto(Productos produ) {
-		
+		try {
+			FXMLLoader alta = new FXMLLoader(getClass().getResource("/fes/aragon/vista/NuevoProducto.fxml"));
+			Parent parent = (Parent) alta.load();
+			((NuevoProductoController) alta.getController()).modificarProdu(produ);
+			Scene escena = new Scene(parent);
+			Stage escenario = new Stage();
+
+			escenario.initModality(Modality.APPLICATION_MODAL);
+			escenario.initOwner(tblTablaProductos.getScene().getWindow());
+
+			escenario.setScene(escena);
+			escenario.initStyle(StageStyle.UTILITY);
+			escenario.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

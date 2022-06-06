@@ -147,16 +147,34 @@ public class Conexion {
 	}
 
 	public void almacenarProductos(Productos produ) throws SQLException {
-
+		String query = "{call insertarProductos(?,?)}";
+		CallableStatement solicitud = conexion.prepareCall(query);
+		solicitud.setString(1, produ.getNombreP());
+		solicitud.setDouble(2, produ.getPreciop());
+		solicitud.execute();
+		solicitud.close();
+		conexion.close();
 	}
 
 	public void eliminarProducto(int id) throws SQLException {
-
+		String query = "{call eliminarProductos(?)}";
+		CallableStatement solicitud = conexion.prepareCall(query);
+		solicitud.setInt(1, id);
+		solicitud.execute();
+		solicitud.close();
+		conexion.close();
 
 	}
 
 	public void modificarProducto(Productos produ) throws SQLException {
-
+		String query = "{call modificarProductos(?,?,?)}";
+		CallableStatement solicitud = conexion.prepareCall(query);
+		solicitud.setInt(1, produ.getId());
+		solicitud.setString(2, produ.getNombreP());
+		solicitud.setDouble(3, produ.getPreciop());
+		solicitud.execute();
+		solicitud.close();
+		conexion.close();
 	}
-	
+
 }
