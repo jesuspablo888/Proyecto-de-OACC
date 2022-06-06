@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="812.0" style="-fx-background-color: #C6CFD5;" type="Pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fes.aragon.controlador.FacturasController">
+   <children>
+      <TableView fx:id="tblTablaFacturas" layoutX="17.0" layoutY="97.0" prefHeight="268.0" prefWidth="778.0">
+        <columns>
+          <TableColumn fx:id="FacturaID" prefWidth="76.0" text="ID Factura" />
+          <TableColumn fx:id="facturaRefencia" prefWidth="105.0" text="Referencia" />
+            <TableColumn fx:id="facturaFecha" prefWidth="86.0" text="Fecha" />
+            <TableColumn fx:id="clienteFacturaID" prefWidth="73.0" text="ID Cliente" />
+            <TableColumn fx:id="facturaNomCliente" prefWidth="172.0" text="Nombre" />
+            <TableColumn fx:id="facturaClienteAP" prefWidth="201.0" text="Apellido Paterno" />
+            <TableColumn fx:id="comando" minWidth="9.0" prefWidth="64.0" text="Opciones" />
+        </columns>
+      </TableView>
+      <FontAwesomeIconView fill="#001aff" glyphName="PLUS" layoutX="26.0" layoutY="81.0" onMouseClicked="#nuevaFactura" size="30">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></FontAwesomeIconView>
+      <FontAwesomeIconView fill="LIME" glyphName="REFRESH" layoutX="74.0" layoutY="81.0" onMouseClicked="#refrescarFacturas" size="30">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></FontAwesomeIconView>
+      <FontAwesomeIconView fill="#36a88f" glyphName="SEARCH" layoutX="115.0" layoutY="81.0" onMouseClicked="#buscarFactura" size="30" visible="false">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
+      <Label layoutX="14.0" layoutY="14.0" text="Facturas">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</fx:root>

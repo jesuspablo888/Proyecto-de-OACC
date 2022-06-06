@@ -1,5 +1,5 @@
 package fes.aragon.modelo;
- 
+
 public class Clientes {
 
 	private Integer id;

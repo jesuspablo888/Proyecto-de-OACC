@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import fes.aragon.modelo.Clientes;
 import fes.aragon.modelo.Facturas;
 import javafx.collections.FXCollections;
@@ -190,5 +189,4 @@ public class Conexion {
 		solicitud.close();
 		conexion.close();
 	}
-	
 }

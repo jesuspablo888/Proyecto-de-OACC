@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="593.0" style="-fx-background-color: #556F81;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fes.aragon.controlador.NuevoFacturaController">
+   <children>
+      <HBox prefHeight="68.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="lbNueva" text="Nueva Factura" textFill="WHITE">
+               <font>
+                  <Font size="31.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="47.0" top="12.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="lbModifica" text="Modificar Factura" textFill="WHITE" visible="false">
+               <font>
+                  <Font size="31.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="-36.0" top="12.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="32.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="162.0" text="Referencia:" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtReferencia" prefHeight="25.0" prefWidth="306.0" promptText="Ingrese la referencia." style="-fx-background-color: #067F7F;" />
+         </children>
+      </HBox>
+      <HBox prefHeight="32.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="162.0" text="Fecha:" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="txtFecha" editable="false" prefHeight="25.0" prefWidth="307.0" promptText="Seleccione la fecha --&gt;" style="-fx-background-color: #067F7F;" />
+         </children>
+      </HBox>
+      <HBox prefHeight="40.0" prefWidth="670.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="426.0" text="Datos Cliente (seleccione uno de la tabla)" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="26.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="32.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="162.0" text="Nombre:" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNombreCliente" editable="false" prefHeight="25.0" prefWidth="306.0" style="-fx-background-color: #067F7F;" />
+         </children>
+      </HBox>
+      <HBox prefHeight="32.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="162.0" text="Apellido:" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtApellidoCliente" editable="false" prefHeight="25.0" prefWidth="306.0" style="-fx-background-color: #067F7F;" />
+         </children>
+      </HBox>
+      <HBox prefHeight="40.0" prefWidth="670.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="162.0" text="Buscar Cliente:" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPatronBusqueda" prefHeight="25.0" prefWidth="306.0" promptText="Ingrese el nombre a buscar." style="-fx-background-color: #067F7F;" />
+            <Button mnemonicParsing="false" onAction="#buscarFactu" prefHeight="16.0" prefWidth="85.0" stylesheets="@../inicio/application.css" text="Buscar" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="19.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="309.0" prefWidth="527.0">
+         <children>
+            <TableView fx:id="tblTablaCliente" prefHeight="309.0" prefWidth="511.0">
+               <columns>
+                  <TableColumn fx:id="clienteID" prefWidth="71.0" text="ID" />
+                  <TableColumn fx:id="clienteNombre" prefWidth="219.0" text="Nombre" />
+                  <TableColumn fx:id="clienmteApellidoPaterno" prefWidth="220.0" text="Apellido Paterno" />
+               </columns>
+            </TableView>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="91.0" prefWidth="670.0" spacing="50.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#guardarFactura" prefHeight="47.0" prefWidth="92.0" stylesheets="@../inicio/application.css" text="Guardar" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#limpiarFactura" prefHeight="47.0" prefWidth="92.0" stylesheets="@../inicio/application.css" text="Limpiar" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
