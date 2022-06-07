@@ -2,6 +2,7 @@ package fes.aragon.controlador;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -81,7 +82,10 @@ public class NuevoFacturaProdController implements Initializable{
     @FXML
     private TextField txtReferencia;
     
-    private FactProd facProducto = null;
+    private Integer idF=0;
+    private Integer idP=0;
+    
+	private FactProd facProducto = null;
 	
     public static String patron="";
     public static String patronF="";
@@ -109,8 +113,24 @@ public class NuevoFacturaProdController implements Initializable{
     }
 
     @FXML
-    void buscarProd(ActionEvent event) {}
-    
+    void buscarProd(ActionEvent event) {
+    	patron=txtPatronBusquedaP.getText();
+    	try {
+			System.out.println("patron: "+patron);
+			Conexion cnn = new Conexion();
+			this.tblTablaProductos.getItems().clear();
+			this.tblTablaProductos.setItems(cnn.buscarProductos(patron));
+	} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			Alert alerta = new Alert(Alert.AlertType.WARNING);
+			alerta.setTitle("Problema");
+			alerta.setHeaderText("Error en la app 3312");
+			alerta.setContentText("Consulta al fabricante, por favor.");
+			alerta.showAndWait();
+			e.printStackTrace();
+		}
+    }
 
     @FXML
     void guardarFacturaProd(ActionEvent event) {
@@ -205,6 +225,20 @@ public class NuevoFacturaProdController implements Initializable{
 	}
 	
 	private void traerDatosP() {
+		try {
+			Conexion cnn = new Conexion();
+			this.tblTablaProductos.getItems().clear();
+			this.tblTablaProductos.setItems(cnn.todosProductos());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			Alert alerta = new Alert(Alert.AlertType.WARNING);
+			alerta.setTitle("Problema");
+			alerta.setHeaderText("Error en la app");
+			alerta.setContentText("Consulta al fabricante, por favor.");
+			alerta.showAndWait();
+			e.printStackTrace();
+		}
 
 	}
 	
@@ -235,14 +269,100 @@ public class NuevoFacturaProdController implements Initializable{
 	}
 
 	private void almacenar(ActionEvent event) {
-		
+		try {
+			Conexion cnn = new Conexion();
+			facProducto.setFactura(this.tblTablaFacturas.getSelectionModel().getSelectedItem());
+			facProducto.setCantidad(Double.parseDouble(txtCantidad.getText()));
+			facProducto.setProducto(this.tblTablaProductos.getSelectionModel().getSelectedItem());
+			cnn.almacenarFacturaProd(facProducto);
+			
+			alertaG.setTitle("Mensaje");
+			alertaG.setHeaderText(null);
+			alertaG.setContentText("Se almaceno la factura-producto.");
+			alertaG.showAndWait();
+			limpiar();
+			facProducto=null;
+		} catch (SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+			alertaG.setTitle("ERROR");
+			alertaG.setHeaderText(null);
+			alertaG.setContentText("Lo siento, no debe repetir registros"
+					+ ".");
+			alertaG.showAndWait();
+			facProducto=null;
+			e.printStackTrace();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			alertaG.setTitle("ERROR");
+			alertaG.setHeaderText(null);
+			alertaG.setContentText("Lo siento, ocurrio un problema en el almacenamiento.");
+			alertaG.showAndWait();
+			e.printStackTrace();
+		}
 	}
 
 	public void modificarFacProducto(FactProd fac) {
-
+		this.lbNueva.setVisible(false);
+		this.lbModifica.setVisible(true);
+		this.txtCantidad.setText(String.valueOf(fac.getCantidad()));
+		this.facProducto = fac;
+		this.txtReferencia.setText(fac.getReferencia());
+		this.txtFecha.setText(String.valueOf(fac.getFecha()));
+		this.txtProducto.setText(fac.getNombreP());
+		this.txtPrecio.setText(String.valueOf(fac.getPreciop()));
+		this.idF=fac.getIdFactura();
+		this.idP=fac.getIdProducto();
 	}
 	
 	private void modificar(ActionEvent event) {
+		try {
+			Conexion cnn = new Conexion();
+			
+			this.tblTablaFacturas.getSelectionModel().selectedItemProperty().addListener((obj, oldSeleccion, newSeleccion) -> {
+				if (newSeleccion != null) {
+					Facturas fr = tblTablaFacturas.getSelectionModel().getSelectedItem();
+					facProducto.setFactura(fr);
+
+				}else {
+					facProducto.setFactura(facProducto.getFactura());
+				}
+			});
+			
+			this.tblTablaProductos.getSelectionModel().selectedItemProperty().addListener((obj, oldSeleccion, newSeleccion) -> {
+				if (newSeleccion != null) {
+					Productos pr = tblTablaProductos.getSelectionModel().getSelectedItem();
+					facProducto.setProducto(pr);
+
+				}else {
+					facProducto.setProducto(facProducto.getProducto());
+				}
+			});
+			
+			facProducto.setCantidad(Double.parseDouble(txtCantidad.getText()));
+
+			cnn.modificarFacturaProd(facProducto, idF, idP);
+			
+			alertaG.setTitle("Mensaje");
+			alertaG.setHeaderText(null);
+			alertaG.setContentText("Se modifico la factura-producto.");
+			alertaG.showAndWait();
+		} catch (SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+			alertaG.setTitle("ERROR");
+			alertaG.setHeaderText(null);
+			alertaG.setContentText("Lo siento, no debe repetir registros"
+					+ ".");
+			alertaG.showAndWait();
+			//facProducto=null;
+			e.printStackTrace();
+		} catch (Exception e) {
+			alertaG.setTitle("ERROR");
+			alertaG.setHeaderText(null);
+			alertaG.setContentText("Lo siento, ocurrio un problema en la modificacion.");
+			alertaG.showAndWait();
+			e.printStackTrace();
+		}
 
 	}
 
